@@ -6,14 +6,18 @@ use LDAP\Result;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class DirectionController extends AbstractController
 {
-    #[Route('/direction', name: 'app_direction')]
+    #[Route('/direction={requests}', methods:['GET','HEAD'], name: 'app_direction')]
 
-    public function dirReduc(): Response
+    public function dirReduc($requests): Response
     {
-        $directions = ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST", "NORTH"];
+         /**
+          * @var request Symfony\Component\HttpFoundation\Request
+          */
+        $directions = $requests->request->all();
         
         // $directionDictionary basically a mapping on the directions in an Array. 
         // As arrays in PHP more of like a mapping.
