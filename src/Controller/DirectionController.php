@@ -19,7 +19,8 @@ class DirectionController extends AbstractController
         
         $directions = explode(",",$requests);
 
-        $reduction_mapping = [
+        // This is the dictionary mapping for the directions.
+        $reductionMapping = [
             'NORTH' => 'SOUTH',
             'SOUTH' => 'NORTH',
             'WEST' => 'EAST',
@@ -27,10 +28,10 @@ class DirectionController extends AbstractController
                 
         ];
             
-        $result = [];
+        $result = []; 
         
         foreach($directions as $direction){
-            if($result && $reduction_mapping[$direction] === end($result)){
+            if($result && $reductionMapping[$direction] === end($result)){
                 array_pop($result);
             } else {
                 array_push($result, $direction);
