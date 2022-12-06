@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,30 +9,59 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DirectionController extends AbstractController
 {
-    #[Route('/direction={requests}', methods:['GET','HEAD'], name: 'app_direction')]
+    #[Route('/direction', methods:['GET','HEAD'], name: 'app_direction')]
 
-    public function dirReduc(Request $requests): Response
+    public function dirReduc(): Response
     {
-         /**
-          * @var request Symfony\Component\HttpFoundation\Request
-          */
-        $directions = $requests->request->all();
-        
-        // $directionDictionary basically a mapping on the directions in an Array. 
-        // As arrays in PHP more of like a mapping.
-        $directionDictionary = [ "NORTH" => "SOUTH", 
-                                 "SOUTH" => "NORTH",
-                                 "EAST"  => "WEST" ,
-                                 "WEST"  => "EAST"
-                            ];
+        //  /**
+        //   * @var request Symfony\Component\HttpFoundation\Request
+        //   */
+        // $directions = $requests->request->all();
+        // $directions = array($directions);
+        $directions = ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST", "NORTH"];
+       
 
         $result = [];
         foreach($directions as $direction){
-            if($result && $directionDictionary[$direction] == $result[-1]){
-                array_pop($result);
+            if(!$result){
+                array_push($result,$direction);
+                
             }
             else{
-                array_push($result[$direction]);
+                if(end($result) == "NORTH"){
+                    if($direction == "SOUTH"){
+                        array_pop($result);
+                    }
+                    else{
+                        array_push($result,$direction);
+                    }
+                }
+                elseif (end($result) == "SOUTH") {
+                    if($direction == "NORTH"){
+                        array_pop($result);
+                    }
+                    else{
+                        array_push($result,$direction);
+                    }
+                }
+                elseif (end($result) == "EAST") {
+                    if($direction == "WEST"){
+                        array_pop($result);
+                    }
+                    else{
+                        array_push($result,$direction);
+                    }
+                }
+                elseif (end($result) == "WEST") {
+                    if($direction == "EAST"){
+                        array_pop($result);
+                    }
+                    else{
+                        array_push($result,$direction);
+                    }
+                }
+                
+                // array_push($result[$direction],$directions);
             }
         }
 
