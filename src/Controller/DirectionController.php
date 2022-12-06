@@ -12,7 +12,7 @@ class DirectionController extends AbstractController
 {
     #[Route('/direction={requests}', methods:['GET','HEAD'], name: 'app_direction')]
 
-    public function dirReduc($requests): Response
+    public function dirReduc(Request $requests): Response
     {
          /**
           * @var request Symfony\Component\HttpFoundation\Request
