@@ -16,11 +16,8 @@ class DirectionController extends AbstractController
          /**
           * @var Symfony\Component\HttpFoundation\Request
           */
-        $directions = $requests->request->all();
-        $directions = array($directions);
-        var_dump($directions);
-        // $directions = ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST", "NORTH"];
-       
+        
+        $directions = explode(",",$requests);
 
         $reduction_mapping = [
             'NORTH' => 'SOUTH',
