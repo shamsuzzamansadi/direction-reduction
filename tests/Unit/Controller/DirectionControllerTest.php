@@ -4,13 +4,11 @@ namespace App\Tests\Unit\Controller;
 
 use App\Controller\DirectionController;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class DirectionControllerTest extends TestCase
 {
-    protected ContainerInterface $cotainer;
-
+ 
     /** @test */
     public function dirReducTest(): void
     {
