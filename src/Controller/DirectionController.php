@@ -9,16 +9,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DirectionController extends AbstractController
 {
-    #[Route('/direction={requests}', methods:['GET','HEAD'], name: 'app_direction')]
 
-    public function dirReduc($requests ): Response
+    #[Route('/', name: 'app_directions_index', methods:['GET'])]
+
+    public function index(Request $request): Response
     {
-         /**
-          * @var Symfony\Component\HttpFoundation\Request
-          */
-        var_dump($requests);
-        $directions = explode(",",$requests);
+        $directions = $request->query->get('directions');
+        if(!$directions) return $this->json(['result' => []]);
 
+        $directionsArray = explode(",",$directions);
+
+        $result = $this->dirReduc($directionsArray);
+
+        return $this->json( [
+            "result" => $result
+        ]);
+    }
+
+    public function dirReduc($directions )
+    {
         // This is the dictionary mapping for the directions.
         $reductionMapping = [
             'NORTH' => 'SOUTH',
@@ -36,11 +45,8 @@ class DirectionController extends AbstractController
             } else {
                 array_push($result, $direction);
             }
-        }
-        var_dump($result); 
+        } 
 
-        return $this->json( [
-            "result" => $result
-        ]);
+        return $result;
     }
 }
