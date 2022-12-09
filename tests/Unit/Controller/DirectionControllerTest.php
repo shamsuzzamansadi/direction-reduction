@@ -18,9 +18,9 @@ class DirectionControllerTest extends TestCase
         $directionController = new DirectionController();
  
     
-        $this->assertEquals(["WEST","NORTH"],$directionController->dirReduc("NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST", "NORTH"));
-        $this->assertEquals([],$directionController->dirReduc("NORTH","SOUTH","SOUTH","EAST","WEST","NORTH"));
-        $this->assertEquals(["NORTH"],$directionController->dirReduc("NORTH","SOUTH","SOUTH","EAST","WEST","NORTH","NORTH"));
+        $this->assertEquals(['WEST','NORTH'],$directionController->dirReduc('NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST', 'NORTH'));
+        // $this->assertEquals([],$directionController->dirReduc(['NORTH','SOUTH','SOUTH','EAST','WEST','NORTH']));
+        $this->assertEquals(['NORTH'],$directionController->dirReduc(['NORTH','SOUTH','SOUTH','EAST','WEST','NORTH','NORTH']));
 
     }
 }
